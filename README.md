@@ -6,7 +6,7 @@ To run the project, make sure you have Elm installed first and then run:
 
 The visit [http://localhost:8000/index.html](http://localhost:8000/index.html) to view the project.
 
-If changes to the TailwindCss are required (for example, if you added TailwindCss classes that you haven't used before) then you need to rebuild the css with the command:
+If changes to the TailwindCss are required (for example, if you added TailwindCss classes that you haven't used before) then you first need to recompile the javascript with the `make` command above and then rebuild the css with the command:
 
 `npx tailwindcss -i ./input.css -o ./dist/output.css --watch`
 
