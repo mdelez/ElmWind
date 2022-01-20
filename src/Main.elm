@@ -6,6 +6,9 @@ import Html.Attributes.Aria exposing (ariaExpanded, ariaHasPopup, ariaHidden, ar
 import Svg exposing (path, svg)
 import Svg.Attributes as SvgAttr exposing (clipRule, d, fill, fillRule, viewBox)
 
+type Status
+    = MenuOpen
+    | MenuClosed
 
 view model =
     viewDropDown
@@ -13,9 +16,11 @@ view model =
 
 viewDropDown : Html msg
 viewDropDown =
-    div [ class "relative inline-block text-left" ]
-        [ viewDropDownButton
-        , viewDropDownMenu
+    div [ class "center" ]
+        [ div [ class "relative inline-block text-left" ]
+            [ viewDropDownButton
+            , viewDropDownMenu True
+            ]
         ]
 
 
@@ -47,59 +52,63 @@ viewDropDownButton =
         ]
 
 
-viewDropDownMenu : Html msg
-viewDropDownMenu =
-    div
-        [ class "origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none"
-        , role "menu"
-        , Attr.attribute "aria-orientation" "vertical"
-        , ariaLabelledby "menu-button"
-        , tabindex -1
-        ]
-        [ div
-            [ class "py-1"
-            , role "none"
+viewDropDownMenu : Bool -> Html msg
+viewDropDownMenu showMenu =
+    if showMenu == True then
+        div
+            [ class "origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none"
+            , role "menu"
+            , Attr.attribute "aria-orientation" "vertical"
+            , ariaLabelledby "menu-button"
+            , tabindex -1
             ]
-            [ a
-                [ href "#"
-                , class "text-gray-700 block px-4 py-2 text-sm"
-                , role "menuitem"
-                , tabindex -1
-                , id "menu-item-0"
-                ]
-                [ text "Account Settings" ]
-            , a
-                [ href "#"
-                , class "text-gray-700 block px-4 py-2 text-sm"
-                , role "menuitem"
-                , tabindex -1
-                , id "menu-item-1"
-                ]
-                [ text "Support" ]
-            , a
-                [ href "#"
-                , class "text-gray-700 block px-4 py-2 text-sm"
-                , role "menuitem"
-                , tabindex -1
-                , id "menu-item-2"
-                ]
-                [ text "License" ]
-            , form
-                [ method "POST"
-                , Attr.action "#"
+            [ div
+                [ class "py-1"
                 , role "none"
                 ]
-                [ button
-                    [ type_ "submit"
-                    , class "text-gray-700 block w-full text-left px-4 py-2 text-sm"
+                [ a
+                    [ href "#"
+                    , class "text-gray-700 block px-4 py-2 text-sm"
                     , role "menuitem"
                     , tabindex -1
-                    , id "menu-item-3"
+                    , id "menu-item-0"
                     ]
-                    [ text "Sign out" ]
+                    [ text "Account Settings" ]
+                , a
+                    [ href "#"
+                    , class "text-gray-700 block px-4 py-2 text-sm"
+                    , role "menuitem"
+                    , tabindex -1
+                    , id "menu-item-1"
+                    ]
+                    [ text "Support" ]
+                , a
+                    [ href "#"
+                    , class "text-gray-700 block px-4 py-2 text-sm"
+                    , role "menuitem"
+                    , tabindex -1
+                    , id "menu-item-2"
+                    ]
+                    [ text "License" ]
+                , form
+                    [ method "POST"
+                    , Attr.action "#"
+                    , role "none"
+                    ]
+                    [ button
+                        [ type_ "submit"
+                        , class "text-gray-700 block w-full text-left px-4 py-2 text-sm"
+                        , role "menuitem"
+                        , tabindex -1
+                        , id "menu-item-3"
+                        ]
+                        [ text "Sign out" ]
+                    ]
                 ]
             ]
-        ]
+
+    else
+        div [] []
 
 
 main =
