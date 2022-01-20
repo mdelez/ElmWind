@@ -4404,6 +4404,21 @@ var $elm$virtual_dom$VirtualDom$toHandlerInt = function (handler) {
 			return 3;
 	}
 };
+var $elm$html$Html$a = _VirtualDom_node('a');
+var $elm$json$Json$Encode$string = _Json_wrap;
+var $elm$html$Html$Attributes$stringProperty = F2(
+	function (key, string) {
+		return A2(
+			_VirtualDom_property,
+			key,
+			$elm$json$Json$Encode$string(string));
+	});
+var $elm$html$Html$Attributes$action = function (uri) {
+	return A2(
+		$elm$html$Html$Attributes$stringProperty,
+		'action',
+		_VirtualDom_noJavaScriptUri(uri));
+};
 var $elm$virtual_dom$VirtualDom$attribute = F2(
 	function (key, value) {
 		return A2(
@@ -4426,15 +4441,8 @@ var $fapian$elm_html_aria$Html$Attributes$Aria$boolAttribute = F2(
 				$elm$json$Json$Encode$bool(val)));
 	});
 var $fapian$elm_html_aria$Html$Attributes$Aria$ariaHidden = $fapian$elm_html_aria$Html$Attributes$Aria$boolAttribute('aria-hidden');
+var $fapian$elm_html_aria$Html$Attributes$Aria$ariaLabelledby = $elm$html$Html$Attributes$attribute('aria-labelledby');
 var $elm$html$Html$button = _VirtualDom_node('button');
-var $elm$json$Json$Encode$string = _Json_wrap;
-var $elm$html$Html$Attributes$stringProperty = F2(
-	function (key, string) {
-		return A2(
-			_VirtualDom_property,
-			key,
-			$elm$json$Json$Encode$string(string));
-	});
 var $elm$html$Html$Attributes$class = $elm$html$Html$Attributes$stringProperty('className');
 var $elm$svg$Svg$Attributes$class = _VirtualDom_attribute('class');
 var $elm$svg$Svg$Attributes$clipRule = _VirtualDom_attribute('clip-rule');
@@ -4442,10 +4450,28 @@ var $elm$svg$Svg$Attributes$d = _VirtualDom_attribute('d');
 var $elm$html$Html$div = _VirtualDom_node('div');
 var $elm$svg$Svg$Attributes$fill = _VirtualDom_attribute('fill');
 var $elm$svg$Svg$Attributes$fillRule = _VirtualDom_attribute('fill-rule');
+var $elm$html$Html$form = _VirtualDom_node('form');
+var $elm$html$Html$Attributes$href = function (url) {
+	return A2(
+		$elm$html$Html$Attributes$stringProperty,
+		'href',
+		_VirtualDom_noJavaScriptUri(url));
+};
 var $elm$html$Html$Attributes$id = $elm$html$Html$Attributes$stringProperty('id');
+var $elm$html$Html$Attributes$method = $elm$html$Html$Attributes$stringProperty('method');
+var $elm$core$Basics$negate = function (n) {
+	return -n;
+};
 var $elm$svg$Svg$trustedNode = _VirtualDom_nodeNS('http://www.w3.org/2000/svg');
 var $elm$svg$Svg$path = $elm$svg$Svg$trustedNode('path');
+var $fapian$elm_html_aria$Html$Attributes$Aria$role = $elm$html$Html$Attributes$attribute('role');
 var $elm$svg$Svg$svg = $elm$svg$Svg$trustedNode('svg');
+var $elm$html$Html$Attributes$tabindex = function (n) {
+	return A2(
+		_VirtualDom_attribute,
+		'tabIndex',
+		$elm$core$String$fromInt(n));
+};
 var $elm$virtual_dom$VirtualDom$text = _VirtualDom_text;
 var $elm$html$Html$text = $elm$virtual_dom$VirtualDom$text;
 var $elm$html$Html$Attributes$type_ = $elm$html$Html$Attributes$stringProperty('type');
@@ -4497,6 +4523,96 @@ var $author$project$Main$view = function (model) {
 												$elm$svg$Svg$Attributes$clipRule('evenodd')
 											]),
 										_List_Nil)
+									]))
+							]))
+					])),
+				A2(
+				$elm$html$Html$div,
+				_List_fromArray(
+					[
+						$elm$html$Html$Attributes$class('origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none'),
+						$fapian$elm_html_aria$Html$Attributes$Aria$role('menu'),
+						A2($elm$html$Html$Attributes$attribute, 'aria-orientation', 'vertical'),
+						$fapian$elm_html_aria$Html$Attributes$Aria$ariaLabelledby('menu-button'),
+						$elm$html$Html$Attributes$tabindex(-1)
+					]),
+				_List_fromArray(
+					[
+						A2(
+						$elm$html$Html$div,
+						_List_fromArray(
+							[
+								$elm$html$Html$Attributes$class('py-1'),
+								$fapian$elm_html_aria$Html$Attributes$Aria$role('none')
+							]),
+						_List_fromArray(
+							[
+								A2(
+								$elm$html$Html$a,
+								_List_fromArray(
+									[
+										$elm$html$Html$Attributes$href('#'),
+										$elm$html$Html$Attributes$class('text-gray-700 block px-4 py-2 text-sm'),
+										$fapian$elm_html_aria$Html$Attributes$Aria$role('menuitem'),
+										$elm$html$Html$Attributes$tabindex(-1),
+										$elm$html$Html$Attributes$id('menu-item-0')
+									]),
+								_List_fromArray(
+									[
+										$elm$html$Html$text('Account Settings')
+									])),
+								A2(
+								$elm$html$Html$a,
+								_List_fromArray(
+									[
+										$elm$html$Html$Attributes$href('#'),
+										$elm$html$Html$Attributes$class('text-gray-700 block px-4 py-2 text-sm'),
+										$fapian$elm_html_aria$Html$Attributes$Aria$role('menuitem'),
+										$elm$html$Html$Attributes$tabindex(-1),
+										$elm$html$Html$Attributes$id('menu-item-1')
+									]),
+								_List_fromArray(
+									[
+										$elm$html$Html$text('Support')
+									])),
+								A2(
+								$elm$html$Html$a,
+								_List_fromArray(
+									[
+										$elm$html$Html$Attributes$href('#'),
+										$elm$html$Html$Attributes$class('text-gray-700 block px-4 py-2 text-sm'),
+										$fapian$elm_html_aria$Html$Attributes$Aria$role('menuitem'),
+										$elm$html$Html$Attributes$tabindex(-1),
+										$elm$html$Html$Attributes$id('menu-item-2')
+									]),
+								_List_fromArray(
+									[
+										$elm$html$Html$text('License')
+									])),
+								A2(
+								$elm$html$Html$form,
+								_List_fromArray(
+									[
+										$elm$html$Html$Attributes$method('POST'),
+										$elm$html$Html$Attributes$action('#'),
+										$fapian$elm_html_aria$Html$Attributes$Aria$role('none')
+									]),
+								_List_fromArray(
+									[
+										A2(
+										$elm$html$Html$button,
+										_List_fromArray(
+											[
+												$elm$html$Html$Attributes$type_('submit'),
+												$elm$html$Html$Attributes$class('text-gray-700 block w-full text-left px-4 py-2 text-sm'),
+												$fapian$elm_html_aria$Html$Attributes$Aria$role('menuitem'),
+												$elm$html$Html$Attributes$tabindex(-1),
+												$elm$html$Html$Attributes$id('menu-item-3')
+											]),
+										_List_fromArray(
+											[
+												$elm$html$Html$text('Sign out')
+											]))
 									]))
 							]))
 					]))

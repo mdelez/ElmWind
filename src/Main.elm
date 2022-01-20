@@ -1,18 +1,18 @@
 module Main exposing (main)
 
-import Html exposing (button, div, text)
-import Html.Attributes as Attr exposing (id, type_)
-import Html.Attributes.Aria exposing (ariaExpanded, ariaHasPopup, ariaHidden)
+import Html exposing (a, button, div, form, text)
+import Html.Attributes as Attr exposing (class, href, id, method, tabindex, type_)
+import Html.Attributes.Aria exposing (ariaExpanded, ariaHasPopup, ariaHidden, ariaLabelledby, role)
 import Svg exposing (path, svg)
 import Svg.Attributes as SvgAttr exposing (clipRule, d, fill, fillRule, viewBox)
 
 
 view model =
-    div [ Attr.class "relative inline-block text-left" ]
+    div [ class "relative inline-block text-left" ]
         [ div []
             [ button
                 [ type_ "button"
-                , Attr.class "inline-flex justify-center w-full rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-indigo-500"
+                , class "inline-flex justify-center w-full rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-indigo-500"
                 , id "menu-button"
                 , ariaExpanded "true"
                 , ariaHasPopup "true"
@@ -30,6 +30,57 @@ view model =
                         , clipRule "evenodd"
                         ]
                         []
+                    ]
+                ]
+            ]
+        , div
+            [ class "origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none"
+            , role "menu"
+            , Attr.attribute "aria-orientation" "vertical"
+            , ariaLabelledby "menu-button"
+            , tabindex -1
+            ]
+            [ div
+                [ class "py-1"
+                , role "none"
+                ]
+                [ a
+                    [ href "#"
+                    , class "text-gray-700 block px-4 py-2 text-sm"
+                    , role "menuitem"
+                    , tabindex -1
+                    , id "menu-item-0"
+                    ]
+                    [ text "Account Settings" ]
+                , a
+                    [ href "#"
+                    , class "text-gray-700 block px-4 py-2 text-sm"
+                    , role "menuitem"
+                    , tabindex -1
+                    , id "menu-item-1"
+                    ]
+                    [ text "Support" ]
+                , a
+                    [ href "#"
+                    , class "text-gray-700 block px-4 py-2 text-sm"
+                    , role "menuitem"
+                    , tabindex -1
+                    , id "menu-item-2"
+                    ]
+                    [ text "License" ]
+                , form
+                    [ method "POST"
+                    , Attr.action "#"
+                    , role "none"
+                    ]
+                    [ button
+                        [ type_ "submit"
+                        , class "text-gray-700 block w-full text-left px-4 py-2 text-sm"
+                        , role "menuitem"
+                        , tabindex -1
+                        , id "menu-item-3"
+                        ]
+                        [ text "Sign out" ]
                     ]
                 ]
             ]
