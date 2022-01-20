@@ -1,15 +1,24 @@
 module Main exposing (main)
 
+import Browser
 import Html exposing (Html, a, button, div, form, text)
 import Html.Attributes as Attr exposing (action, class, href, id, method, tabindex, type_)
 import Html.Attributes.Aria exposing (ariaExpanded, ariaHasPopup, ariaHidden, ariaLabelledby, role)
 import Svg exposing (path, svg)
 import Svg.Attributes as SvgAttr exposing (clipRule, d, fill, fillRule, viewBox)
 
-type Status
-    = MenuOpen
-    | MenuClosed
 
+type DropdownStatus
+    = Open
+    | Closed
+
+
+type alias Model =
+    { dropdownStatus : DropdownStatus
+    }
+
+
+view : Model -> Html msg
 view model =
     viewDropDown
 
@@ -111,5 +120,30 @@ viewDropDownMenu showMenu =
         div [] []
 
 
+init : () -> ( Model, Cmd msg )
+init _ =
+    ( { dropdownStatus = Closed }, Cmd.none )
+
+
+type Msg
+    = DropdownButtonClicked
+
+
+update : msg -> Model -> ( Model, Cmd msg )
+update _ model =
+    ( model, Cmd.none )
+
+
+subscriptions : Model -> Sub msg
+subscriptions model =
+    Sub.none
+
+
+main : Program () Model msg
 main =
-    view "no model yet"
+    Browser.element
+        { init = init
+        , view = view
+        , update = update
+        , subscriptions = subscriptions
+        }
