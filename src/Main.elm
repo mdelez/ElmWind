@@ -2,7 +2,7 @@ module Main exposing (main)
 
 import Browser
 import Html exposing (Html, a, button, div, form, text)
-import Html.Attributes as Attr exposing (action, class, href, id, method, tabindex, type_)
+import Html.Attributes as Attr exposing (action, class, classList, href, id, method, tabindex, type_)
 import Html.Attributes.Aria exposing (ariaExpanded, ariaHasPopup, ariaHidden, ariaLabelledby, role)
 import Html.Events exposing (onClick)
 import Svg exposing (path, svg)
@@ -62,11 +62,22 @@ viewDropDownButton =
         ]
 
 
+
+-- Dropdown menu, show/hide based on menu state.
+--     Entering: "transition ease-out duration-100"
+--       From: "transform opacity-0 scale-95"
+--       To: "transform opacity-100 scale-100"
+--     Leaving: "transition ease-in duration-75"
+--       From: "transform opacity-100 scale-100"
+--       To: "transform opacity-0 scale-95"
+
+
 viewDropDownMenu : Model -> Html msg
 viewDropDownMenu model =
     if model.dropdownStatus == Open then
         div
             [ class "origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none"
+            , class "dropdownMenu open"
             , role "menu"
             , Attr.attribute "aria-orientation" "vertical"
             , ariaLabelledby "menu-button"
@@ -118,7 +129,7 @@ viewDropDownMenu model =
             ]
 
     else
-        div [] []
+        div [ class "dropdownMenu" ] []
 
 
 init : () -> ( Model, Cmd msg )

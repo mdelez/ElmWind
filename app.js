@@ -5313,6 +5313,7 @@ var $author$project$Main$viewDropDownMenu = function (model) {
 		_List_fromArray(
 			[
 				$elm$html$Html$Attributes$class('origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none'),
+				$elm$html$Html$Attributes$class('dropdownMenu open'),
 				$fapian$elm_html_aria$Html$Attributes$Aria$role('menu'),
 				A2($elm$html$Html$Attributes$attribute, 'aria-orientation', 'vertical'),
 				$fapian$elm_html_aria$Html$Attributes$Aria$ariaLabelledby('menu-button'),
@@ -5397,7 +5398,13 @@ var $author$project$Main$viewDropDownMenu = function (model) {
 									]))
 							]))
 					]))
-			])) : A2($elm$html$Html$div, _List_Nil, _List_Nil);
+			])) : A2(
+		$elm$html$Html$div,
+		_List_fromArray(
+			[
+				$elm$html$Html$Attributes$class('dropdownMenu')
+			]),
+		_List_Nil);
 };
 var $author$project$Main$viewDropDown = function (model) {
 	return A2(

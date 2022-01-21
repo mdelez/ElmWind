@@ -3,3 +3,14 @@
     margin-right: auto;
     width: 7em;
 }
+
+.dropdownMenu {
+    opacity: 0;
+    scale: 95%;
+    transition: all ease-out 100ms;
+}
+
+.dropdownMenu.open {
+    opacity: 1;
+    scale: 100%;
+}
