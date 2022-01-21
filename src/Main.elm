@@ -4,6 +4,7 @@ import Browser
 import Html exposing (Html, a, button, div, form, text)
 import Html.Attributes as Attr exposing (action, class, href, id, method, tabindex, type_)
 import Html.Attributes.Aria exposing (ariaExpanded, ariaHasPopup, ariaHidden, ariaLabelledby, role)
+import Html.Events exposing (onClick)
 import Svg exposing (path, svg)
 import Svg.Attributes as SvgAttr exposing (clipRule, d, fill, fillRule, viewBox)
 
@@ -14,26 +15,25 @@ type DropdownStatus
 
 
 type alias Model =
-    { dropdownStatus : DropdownStatus
-    }
+    { dropdownStatus : DropdownStatus }
 
 
-view : Model -> Html msg
+view : Model -> Html Msg
 view model =
-    viewDropDown
+    viewDropDown model
 
 
-viewDropDown : Html msg
-viewDropDown =
+viewDropDown : Model -> Html Msg
+viewDropDown model =
     div [ class "center" ]
         [ div [ class "relative inline-block text-left" ]
             [ viewDropDownButton
-            , viewDropDownMenu True
+            , viewDropDownMenu model
             ]
         ]
 
 
-viewDropDownButton : Html msg
+viewDropDownButton : Html Msg
 viewDropDownButton =
     div []
         [ button
@@ -42,6 +42,7 @@ viewDropDownButton =
             , id "menu-button"
             , ariaExpanded "true"
             , ariaHasPopup "true"
+            , onClick DropdownButtonClicked
             ]
             [ text "Options"
             , svg
@@ -61,9 +62,9 @@ viewDropDownButton =
         ]
 
 
-viewDropDownMenu : Bool -> Html msg
-viewDropDownMenu showMenu =
-    if showMenu == True then
+viewDropDownMenu : Model -> Html msg
+viewDropDownMenu model =
+    if model.dropdownStatus == Open then
         div
             [ class "origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none"
             , role "menu"
@@ -129,9 +130,16 @@ type Msg
     = DropdownButtonClicked
 
 
-update : msg -> Model -> ( Model, Cmd msg )
-update _ model =
-    ( model, Cmd.none )
+update : Msg -> Model -> ( Model, Cmd Msg )
+update msg model =
+    case msg of
+        DropdownButtonClicked ->
+            case model.dropdownStatus of
+                Open ->
+                    ( { model | dropdownStatus = Closed }, Cmd.none )
+
+                Closed ->
+                    ( { model | dropdownStatus = Open }, Cmd.none )
 
 
 subscriptions : Model -> Sub msg
@@ -139,7 +147,7 @@ subscriptions model =
     Sub.none
 
 
-main : Program () Model msg
+main : Program () Model Msg
 main =
     Browser.element
         { init = init

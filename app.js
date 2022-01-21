@@ -5157,9 +5157,23 @@ var $elm$core$Platform$Sub$none = $elm$core$Platform$Sub$batch(_List_Nil);
 var $author$project$Main$subscriptions = function (model) {
 	return $elm$core$Platform$Sub$none;
 };
+var $author$project$Main$Open = {$: 'Open'};
 var $author$project$Main$update = F2(
-	function (_v0, model) {
-		return _Utils_Tuple2(model, $elm$core$Platform$Cmd$none);
+	function (msg, model) {
+		var _v1 = model.dropdownStatus;
+		if (_v1.$ === 'Open') {
+			return _Utils_Tuple2(
+				_Utils_update(
+					model,
+					{dropdownStatus: $author$project$Main$Closed}),
+				$elm$core$Platform$Cmd$none);
+		} else {
+			return _Utils_Tuple2(
+				_Utils_update(
+					model,
+					{dropdownStatus: $author$project$Main$Open}),
+				$elm$core$Platform$Cmd$none);
+		}
 	});
 var $elm$json$Json$Encode$string = _Json_wrap;
 var $elm$html$Html$Attributes$stringProperty = F2(
@@ -5171,6 +5185,7 @@ var $elm$html$Html$Attributes$stringProperty = F2(
 	});
 var $elm$html$Html$Attributes$class = $elm$html$Html$Attributes$stringProperty('className');
 var $elm$html$Html$div = _VirtualDom_node('div');
+var $author$project$Main$DropdownButtonClicked = {$: 'DropdownButtonClicked'};
 var $elm$virtual_dom$VirtualDom$attribute = F2(
 	function (key, value) {
 		return A2(
@@ -5200,6 +5215,23 @@ var $elm$svg$Svg$Attributes$d = _VirtualDom_attribute('d');
 var $elm$svg$Svg$Attributes$fill = _VirtualDom_attribute('fill');
 var $elm$svg$Svg$Attributes$fillRule = _VirtualDom_attribute('fill-rule');
 var $elm$html$Html$Attributes$id = $elm$html$Html$Attributes$stringProperty('id');
+var $elm$virtual_dom$VirtualDom$Normal = function (a) {
+	return {$: 'Normal', a: a};
+};
+var $elm$virtual_dom$VirtualDom$on = _VirtualDom_on;
+var $elm$html$Html$Events$on = F2(
+	function (event, decoder) {
+		return A2(
+			$elm$virtual_dom$VirtualDom$on,
+			event,
+			$elm$virtual_dom$VirtualDom$Normal(decoder));
+	});
+var $elm$html$Html$Events$onClick = function (msg) {
+	return A2(
+		$elm$html$Html$Events$on,
+		'click',
+		$elm$json$Json$Decode$succeed(msg));
+};
 var $elm$svg$Svg$trustedNode = _VirtualDom_nodeNS('http://www.w3.org/2000/svg');
 var $elm$svg$Svg$path = $elm$svg$Svg$trustedNode('path');
 var $elm$svg$Svg$svg = $elm$svg$Svg$trustedNode('svg');
@@ -5220,7 +5252,8 @@ var $author$project$Main$viewDropDownButton = A2(
 					$elm$html$Html$Attributes$class('inline-flex justify-center w-full rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-indigo-500'),
 					$elm$html$Html$Attributes$id('menu-button'),
 					$fapian$elm_html_aria$Html$Attributes$Aria$ariaExpanded('true'),
-					$fapian$elm_html_aria$Html$Attributes$Aria$ariaHasPopup('true')
+					$fapian$elm_html_aria$Html$Attributes$Aria$ariaHasPopup('true'),
+					$elm$html$Html$Events$onClick($author$project$Main$DropdownButtonClicked)
 				]),
 			_List_fromArray(
 				[
@@ -5274,8 +5307,8 @@ var $elm$html$Html$Attributes$tabindex = function (n) {
 		'tabIndex',
 		$elm$core$String$fromInt(n));
 };
-var $author$project$Main$viewDropDownMenu = function (showMenu) {
-	return showMenu ? A2(
+var $author$project$Main$viewDropDownMenu = function (model) {
+	return _Utils_eq(model.dropdownStatus, $author$project$Main$Open) ? A2(
 		$elm$html$Html$div,
 		_List_fromArray(
 			[
@@ -5366,28 +5399,30 @@ var $author$project$Main$viewDropDownMenu = function (showMenu) {
 					]))
 			])) : A2($elm$html$Html$div, _List_Nil, _List_Nil);
 };
-var $author$project$Main$viewDropDown = A2(
-	$elm$html$Html$div,
-	_List_fromArray(
-		[
-			$elm$html$Html$Attributes$class('center')
-		]),
-	_List_fromArray(
-		[
-			A2(
-			$elm$html$Html$div,
-			_List_fromArray(
-				[
-					$elm$html$Html$Attributes$class('relative inline-block text-left')
-				]),
-			_List_fromArray(
-				[
-					$author$project$Main$viewDropDownButton,
-					$author$project$Main$viewDropDownMenu(true)
-				]))
-		]));
+var $author$project$Main$viewDropDown = function (model) {
+	return A2(
+		$elm$html$Html$div,
+		_List_fromArray(
+			[
+				$elm$html$Html$Attributes$class('center')
+			]),
+		_List_fromArray(
+			[
+				A2(
+				$elm$html$Html$div,
+				_List_fromArray(
+					[
+						$elm$html$Html$Attributes$class('relative inline-block text-left')
+					]),
+				_List_fromArray(
+					[
+						$author$project$Main$viewDropDownButton,
+						$author$project$Main$viewDropDownMenu(model)
+					]))
+			]));
+};
 var $author$project$Main$view = function (model) {
-	return $author$project$Main$viewDropDown;
+	return $author$project$Main$viewDropDown(model);
 };
 var $author$project$Main$main = $elm$browser$Browser$element(
 	{init: $author$project$Main$init, subscriptions: $author$project$Main$subscriptions, update: $author$project$Main$update, view: $author$project$Main$view});
