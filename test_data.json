@@ -1,0 +1,11 @@
+data = {"dropdown": {
+    "header" : "Best MTG color",
+    "options": [
+        {"text" : "Black", "type" : "link"},
+        {"text" : "Blue", "type" : "link"},
+        {"text" : "Green", "type" : "button"},
+        {"text" : "Red", "type" : "link"},
+        {"text" : "White", "type" : "button"},
+        {"text" : "Colorless", "type" : "link"}
+    ]
+}}
