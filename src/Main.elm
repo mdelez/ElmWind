@@ -4,7 +4,7 @@ import Browser
 import Html exposing (Html, a, button, div, form, text)
 import Html.Attributes as Attr exposing (action, class, classList, href, id, method, tabindex, type_)
 import Html.Attributes.Aria exposing (ariaExpanded, ariaHasPopup, ariaHidden, ariaLabelledby, role)
-import Html.Events exposing (onClick)
+import Html.Events exposing (onClick, onMouseEnter)
 import Svg exposing (path, svg)
 import Svg.Attributes as SvgAttr exposing (clipRule, d, fill, fillRule, viewBox)
 
@@ -15,7 +15,9 @@ type DropdownStatus
 
 
 type alias Model =
-    { dropdownStatus : DropdownStatus }
+    { dropdownStatus : DropdownStatus
+    , hoveredItem : String
+    }
 
 
 view : Model -> Html Msg
@@ -72,12 +74,12 @@ viewDropDownButton =
 --       To: "transform opacity-0 scale-95"
 
 
-viewDropDownMenu : Model -> Html msg
+viewDropDownMenu : Model -> Html Msg
 viewDropDownMenu model =
     if model.dropdownStatus == Open then
         div
             [ class "origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none"
-            , class "dropdownMenu open"
+            , class "dropdown-menu open"
             , role "menu"
             , Attr.attribute "aria-orientation" "vertical"
             , ariaLabelledby "menu-button"
@@ -90,25 +92,43 @@ viewDropDownMenu model =
                 [ a
                     [ href "#"
                     , class "text-gray-700 block px-4 py-2 text-sm"
+                    , class "menu-item"
+                    , classList
+                        [ ("text-gray-900", model.hoveredItem == "menu-item-0")
+                        , ("bg-gray-100", model.hoveredItem == "menu-item-0")
+                        ]
                     , role "menuitem"
                     , tabindex -1
                     , id "menu-item-0"
+                    , onMouseEnter (ItemHovered "menu-item-0")
                     ]
                     [ text "Account Settings" ]
                 , a
                     [ href "#"
                     , class "text-gray-700 block px-4 py-2 text-sm"
+                    , class "menu-item"
+                    , classList
+                        [ ("text-gray-900", model.hoveredItem == "menu-item-1")
+                        , ("bg-gray-100", model.hoveredItem == "menu-item-1")
+                        ]
                     , role "menuitem"
                     , tabindex -1
                     , id "menu-item-1"
+                    , onMouseEnter (ItemHovered "menu-item-1")
                     ]
                     [ text "Support" ]
                 , a
                     [ href "#"
                     , class "text-gray-700 block px-4 py-2 text-sm"
+                    , class "menu-item"
+                    , classList
+                        [ ("text-gray-900", model.hoveredItem == "menu-item-2")
+                        , ("bg-gray-100", model.hoveredItem == "menu-item-2")
+                        ]
                     , role "menuitem"
                     , tabindex -1
                     , id "menu-item-2"
+                    , onMouseEnter (ItemHovered "menu-item-2")
                     ]
                     [ text "License" ]
                 , form
@@ -119,9 +139,15 @@ viewDropDownMenu model =
                     [ button
                         [ type_ "submit"
                         , class "text-gray-700 block w-full text-left px-4 py-2 text-sm"
+                        , class "menu-item"
+                        , classList
+                        [ ("text-gray-900", model.hoveredItem == "menu-item-3")
+                        , ("bg-gray-100", model.hoveredItem == "menu-item-3")
+                        ]
                         , role "menuitem"
                         , tabindex -1
                         , id "menu-item-3"
+                        , onMouseEnter (ItemHovered "menu-item-3")
                         ]
                         [ text "Sign out" ]
                     ]
@@ -129,16 +155,17 @@ viewDropDownMenu model =
             ]
 
     else
-        div [ class "dropdownMenu" ] []
+        div [ class "dropdown-menu" ] []
 
 
 init : () -> ( Model, Cmd msg )
 init _ =
-    ( { dropdownStatus = Closed }, Cmd.none )
+    ( { dropdownStatus = Closed, hoveredItem = "" }, Cmd.none )
 
 
 type Msg
     = DropdownButtonClicked
+    | ItemHovered String
 
 
 update : Msg -> Model -> ( Model, Cmd Msg )
@@ -147,10 +174,13 @@ update msg model =
         DropdownButtonClicked ->
             case model.dropdownStatus of
                 Open ->
-                    ( { model | dropdownStatus = Closed }, Cmd.none )
+                    ( { model | dropdownStatus = Closed, hoveredItem = "" }, Cmd.none )
 
                 Closed ->
                     ( { model | dropdownStatus = Open }, Cmd.none )
+
+        ItemHovered id ->
+            ( { model | hoveredItem = id }, Cmd.none )
 
 
 subscriptions : Model -> Sub msg
