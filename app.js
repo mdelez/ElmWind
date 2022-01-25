@@ -10536,18 +10536,44 @@ var $elm$core$Basics$never = function (_v0) {
 	}
 };
 var $elm$browser$Browser$element = _Browser_element;
+var $author$project$Hero$Closed = {$: 'Closed'};
 var $author$project$Hero$init = function (_v0) {
-	return _Utils_Tuple2('Hello from Elm app', $elm$core$Platform$Cmd$none);
+	return _Utils_Tuple2(
+		{mobileMenuStatus: $author$project$Hero$Closed},
+		$elm$core$Platform$Cmd$none);
 };
 var $elm$core$Platform$Sub$batch = _Platform_batch;
 var $elm$core$Platform$Sub$none = $elm$core$Platform$Sub$batch(_List_Nil);
 var $author$project$Hero$subscriptions = function (_v0) {
 	return $elm$core$Platform$Sub$none;
 };
+var $author$project$Hero$Open = {$: 'Open'};
 var $author$project$Hero$update = F2(
-	function (_v0, model) {
-		return _Utils_Tuple2(model, $elm$core$Platform$Cmd$none);
+	function (msg, model) {
+		if (msg.$ === 'MobileMenuButtonClicked') {
+			var _v1 = model.mobileMenuStatus;
+			if (_v1.$ === 'Open') {
+				return _Utils_Tuple2(
+					_Utils_update(
+						model,
+						{mobileMenuStatus: $author$project$Hero$Closed}),
+					$elm$core$Platform$Cmd$none);
+			} else {
+				return _Utils_Tuple2(
+					_Utils_update(
+						model,
+						{mobileMenuStatus: $author$project$Hero$Open}),
+					$elm$core$Platform$Cmd$none);
+			}
+		} else {
+			return _Utils_Tuple2(
+				_Utils_update(
+					model,
+					{mobileMenuStatus: $author$project$Hero$Closed}),
+				$elm$core$Platform$Cmd$none);
+		}
 	});
+var $author$project$Hero$MobileMenuButtonClicked = {$: 'MobileMenuButtonClicked'};
 var $elm$html$Html$Attributes$alt = $elm$html$Html$Attributes$stringProperty('alt');
 var $elm$html$Html$Attributes$attribute = $elm$virtual_dom$VirtualDom$attribute;
 var $fapian$elm_html_aria$Html$Attributes$Aria$ariaExpanded = $elm$html$Html$Attributes$attribute('aria-expanded');
@@ -10591,6 +10617,168 @@ var $elm$svg$Svg$Attributes$strokeLinejoin = _VirtualDom_attribute('stroke-linej
 var $elm$svg$Svg$Attributes$strokeWidth = _VirtualDom_attribute('stroke-width');
 var $elm$svg$Svg$svg = $elm$svg$Svg$trustedNode('svg');
 var $elm$svg$Svg$Attributes$viewBox = _VirtualDom_attribute('viewBox');
+var $author$project$Hero$CloseMobileMenuButtonClicked = {$: 'CloseMobileMenuButtonClicked'};
+var $author$project$Hero$viewMobileMenu = function (model) {
+	return _Utils_eq(model.mobileMenuStatus, $author$project$Hero$Open) ? A2(
+		$elm$html$Html$div,
+		_List_fromArray(
+			[
+				$elm$html$Html$Attributes$class('absolute z-10 top-0 inset-x-0 p-2 transition transform origin-top-right md:hidden')
+			]),
+		_List_fromArray(
+			[
+				A2(
+				$elm$html$Html$div,
+				_List_fromArray(
+					[
+						$elm$html$Html$Attributes$class('rounded-lg shadow-md bg-white ring-1 ring-black ring-opacity-5 overflow-hidden')
+					]),
+				_List_fromArray(
+					[
+						A2(
+						$elm$html$Html$div,
+						_List_fromArray(
+							[
+								$elm$html$Html$Attributes$class('px-5 pt-4 flex items-center justify-between')
+							]),
+						_List_fromArray(
+							[
+								A2(
+								$elm$html$Html$div,
+								_List_Nil,
+								_List_fromArray(
+									[
+										A2(
+										$elm$html$Html$img,
+										_List_fromArray(
+											[
+												$elm$html$Html$Attributes$class('h-8 w-auto'),
+												$elm$html$Html$Attributes$src('https://tailwindui.com/img/logos/workflow-mark-indigo-600.svg'),
+												$elm$html$Html$Attributes$alt('')
+											]),
+										_List_Nil)
+									])),
+								A2(
+								$elm$html$Html$div,
+								_List_fromArray(
+									[
+										$elm$html$Html$Attributes$class('-mr-2')
+									]),
+								_List_fromArray(
+									[
+										A2(
+										$elm$html$Html$button,
+										_List_fromArray(
+											[
+												$elm$html$Html$Attributes$type_('button'),
+												$elm$html$Html$Attributes$class('bg-white rounded-md p-2 inline-flex items-center justify-center text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500'),
+												$elm$html$Html$Events$onClick($author$project$Hero$CloseMobileMenuButtonClicked)
+											]),
+										_List_fromArray(
+											[
+												A2(
+												$elm$html$Html$span,
+												_List_fromArray(
+													[
+														$elm$html$Html$Attributes$class('sr-only')
+													]),
+												_List_fromArray(
+													[
+														$elm$html$Html$text('Close menu')
+													])),
+												A2(
+												$elm$svg$Svg$svg,
+												_List_fromArray(
+													[
+														$elm$svg$Svg$Attributes$class('h-6 w-6'),
+														$elm$svg$Svg$Attributes$fill('none'),
+														$elm$svg$Svg$Attributes$viewBox('0 0 24 24'),
+														$elm$svg$Svg$Attributes$stroke('currentColor'),
+														$fapian$elm_html_aria$Html$Attributes$Aria$ariaHidden(true)
+													]),
+												_List_fromArray(
+													[
+														A2(
+														$elm$svg$Svg$path,
+														_List_fromArray(
+															[
+																$elm$svg$Svg$Attributes$strokeLinecap('round'),
+																$elm$svg$Svg$Attributes$strokeLinejoin('round'),
+																$elm$svg$Svg$Attributes$strokeWidth('2'),
+																$elm$svg$Svg$Attributes$d('M6 18L18 6M6 6l12 12')
+															]),
+														_List_Nil)
+													]))
+											]))
+									]))
+							])),
+						A2(
+						$elm$html$Html$div,
+						_List_fromArray(
+							[
+								$elm$html$Html$Attributes$class('px-2 pt-2 pb-3')
+							]),
+						_List_fromArray(
+							[
+								A2(
+								$elm$html$Html$a,
+								_List_fromArray(
+									[
+										$elm$html$Html$Attributes$href('#'),
+										$elm$html$Html$Attributes$class('block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50')
+									]),
+								_List_fromArray(
+									[
+										$elm$html$Html$text('Product')
+									])),
+								A2(
+								$elm$html$Html$a,
+								_List_fromArray(
+									[
+										$elm$html$Html$Attributes$href('#'),
+										$elm$html$Html$Attributes$class('block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50')
+									]),
+								_List_fromArray(
+									[
+										$elm$html$Html$text('Features')
+									])),
+								A2(
+								$elm$html$Html$a,
+								_List_fromArray(
+									[
+										$elm$html$Html$Attributes$href('#'),
+										$elm$html$Html$Attributes$class('block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50')
+									]),
+								_List_fromArray(
+									[
+										$elm$html$Html$text('Marketplace')
+									])),
+								A2(
+								$elm$html$Html$a,
+								_List_fromArray(
+									[
+										$elm$html$Html$Attributes$href('#'),
+										$elm$html$Html$Attributes$class('block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50')
+									]),
+								_List_fromArray(
+									[
+										$elm$html$Html$text('Company')
+									]))
+							])),
+						A2(
+						$elm$html$Html$a,
+						_List_fromArray(
+							[
+								$elm$html$Html$Attributes$href('#'),
+								$elm$html$Html$Attributes$class('block w-full px-5 py-3 text-center font-medium text-indigo-600 bg-gray-50 hover:bg-gray-100')
+							]),
+						_List_fromArray(
+							[
+								$elm$html$Html$text('Log in')
+							]))
+					]))
+			])) : A2($elm$html$Html$div, _List_Nil, _List_Nil);
+};
 var $elm$svg$Svg$Attributes$width = _VirtualDom_attribute('width');
 var $elm$svg$Svg$Attributes$x = _VirtualDom_attribute('x');
 var $elm$svg$Svg$Attributes$y = _VirtualDom_attribute('y');
@@ -10818,7 +11006,8 @@ var $author$project$Hero$view = function (model) {
 																			[
 																				$elm$html$Html$Attributes$type_('button'),
 																				$elm$html$Html$Attributes$class('bg-gray-50 rounded-md p-2 inline-flex items-center justify-center text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500'),
-																				$fapian$elm_html_aria$Html$Attributes$Aria$ariaExpanded('false')
+																				$fapian$elm_html_aria$Html$Attributes$Aria$ariaExpanded('false'),
+																				$elm$html$Html$Events$onClick($author$project$Hero$MobileMenuButtonClicked)
 																			]),
 																		_List_fromArray(
 																			[
@@ -10942,7 +11131,8 @@ var $author$project$Hero$view = function (model) {
 															]))
 													]))
 											]))
-									]))
+									])),
+								$author$project$Hero$viewMobileMenu(model)
 							])),
 						A2(
 						$elm$html$Html$main_,
@@ -10986,7 +11176,7 @@ var $author$project$Hero$view = function (model) {
 													]),
 												_List_fromArray(
 													[
-														$elm$html$Html$text('online business')
+														$elm$html$Html$text(' online business')
 													]))
 											])),
 										A2(
@@ -11056,4 +11246,4 @@ var $author$project$Hero$view = function (model) {
 var $author$project$Hero$main = $elm$browser$Browser$element(
 	{init: $author$project$Hero$init, subscriptions: $author$project$Hero$subscriptions, update: $author$project$Hero$update, view: $author$project$Hero$view});
 _Platform_export({'Hero':{'init':$author$project$Hero$main(
-	$elm$json$Json$Decode$succeed(_Utils_Tuple0))({"versions":{"elm":"0.19.1"},"types":{"message":"msg","aliases":{},"unions":{}}})}});}(this));
+	$elm$json$Json$Decode$succeed(_Utils_Tuple0))({"versions":{"elm":"0.19.1"},"types":{"message":"Hero.Msg","aliases":{},"unions":{"Hero.Msg":{"args":[],"tags":{"MobileMenuButtonClicked":[],"CloseMobileMenuButtonClicked":[]}}}}})}});}(this));
