@@ -10536,48 +10536,47 @@ var $elm$core$Basics$never = function (_v0) {
 	}
 };
 var $elm$browser$Browser$element = _Browser_element;
-var $author$project$Main$Closed = {$: 'Closed'};
-var $author$project$Main$init = function (_v0) {
+var $author$project$Hero$Closed = {$: 'Closed'};
+var $author$project$Hero$init = function (_v0) {
 	return _Utils_Tuple2(
-		{dropdownStatus: $author$project$Main$Closed, hoveredItem: ''},
+		{mobileMenuStatus: $author$project$Hero$Closed},
 		$elm$core$Platform$Cmd$none);
 };
 var $elm$core$Platform$Sub$batch = _Platform_batch;
 var $elm$core$Platform$Sub$none = $elm$core$Platform$Sub$batch(_List_Nil);
-var $author$project$Main$subscriptions = function (model) {
+var $author$project$Hero$subscriptions = function (_v0) {
 	return $elm$core$Platform$Sub$none;
 };
-var $author$project$Main$Open = {$: 'Open'};
-var $author$project$Main$update = F2(
+var $author$project$Hero$Open = {$: 'Open'};
+var $author$project$Hero$update = F2(
 	function (msg, model) {
-		if (msg.$ === 'DropdownButtonClicked') {
-			var _v1 = model.dropdownStatus;
+		if (msg.$ === 'MobileMenuButtonClicked') {
+			var _v1 = model.mobileMenuStatus;
 			if (_v1.$ === 'Open') {
 				return _Utils_Tuple2(
 					_Utils_update(
 						model,
-						{dropdownStatus: $author$project$Main$Closed, hoveredItem: ''}),
+						{mobileMenuStatus: $author$project$Hero$Closed}),
 					$elm$core$Platform$Cmd$none);
 			} else {
 				return _Utils_Tuple2(
 					_Utils_update(
 						model,
-						{dropdownStatus: $author$project$Main$Open}),
+						{mobileMenuStatus: $author$project$Hero$Open}),
 					$elm$core$Platform$Cmd$none);
 			}
 		} else {
-			var id = msg.a;
 			return _Utils_Tuple2(
 				_Utils_update(
 					model,
-					{hoveredItem: id}),
+					{mobileMenuStatus: $author$project$Hero$Closed}),
 				$elm$core$Platform$Cmd$none);
 		}
 	});
-var $author$project$Main$DropdownButtonClicked = {$: 'DropdownButtonClicked'};
+var $author$project$Hero$MobileMenuButtonClicked = {$: 'MobileMenuButtonClicked'};
+var $elm$html$Html$Attributes$alt = $elm$html$Html$Attributes$stringProperty('alt');
 var $elm$html$Html$Attributes$attribute = $elm$virtual_dom$VirtualDom$attribute;
 var $fapian$elm_html_aria$Html$Attributes$Aria$ariaExpanded = $elm$html$Html$Attributes$attribute('aria-expanded');
-var $fapian$elm_html_aria$Html$Attributes$Aria$ariaHasPopup = $elm$html$Html$Attributes$attribute('aria-haspopup');
 var $elm$json$Json$Encode$bool = _Json_wrap;
 var $fapian$elm_html_aria$Html$Attributes$Aria$boolAttribute = F2(
 	function (name, val) {
@@ -10590,114 +10589,41 @@ var $fapian$elm_html_aria$Html$Attributes$Aria$boolAttribute = F2(
 				$elm$json$Json$Encode$bool(val)));
 	});
 var $fapian$elm_html_aria$Html$Attributes$Aria$ariaHidden = $fapian$elm_html_aria$Html$Attributes$Aria$boolAttribute('aria-hidden');
+var $fapian$elm_html_aria$Html$Attributes$Aria$ariaLabel = $elm$html$Html$Attributes$attribute('aria-label');
 var $elm$svg$Svg$Attributes$class = _VirtualDom_attribute('class');
-var $elm$svg$Svg$Attributes$clipRule = _VirtualDom_attribute('clip-rule');
 var $elm$svg$Svg$Attributes$d = _VirtualDom_attribute('d');
-var $elm$svg$Svg$Attributes$fill = _VirtualDom_attribute('fill');
-var $elm$svg$Svg$Attributes$fillRule = _VirtualDom_attribute('fill-rule');
 var $elm$svg$Svg$trustedNode = _VirtualDom_nodeNS('http://www.w3.org/2000/svg');
+var $elm$svg$Svg$defs = $elm$svg$Svg$trustedNode('defs');
+var $elm$svg$Svg$Attributes$fill = _VirtualDom_attribute('fill');
+var $elm$html$Html$h1 = _VirtualDom_node('h1');
+var $elm$svg$Svg$Attributes$height = _VirtualDom_attribute('height');
+var $elm$svg$Svg$Attributes$id = _VirtualDom_attribute('id');
+var $elm$html$Html$img = _VirtualDom_node('img');
+var $elm$html$Html$main_ = _VirtualDom_node('main');
+var $elm$html$Html$nav = _VirtualDom_node('nav');
 var $elm$svg$Svg$path = $elm$svg$Svg$trustedNode('path');
-var $elm$svg$Svg$svg = $elm$svg$Svg$trustedNode('svg');
-var $elm$svg$Svg$Attributes$viewBox = _VirtualDom_attribute('viewBox');
-var $author$project$Main$viewDropDownButton = A2(
-	$elm$html$Html$div,
-	_List_Nil,
-	_List_fromArray(
-		[
-			A2(
-			$elm$html$Html$button,
-			_List_fromArray(
-				[
-					$elm$html$Html$Attributes$type_('button'),
-					$elm$html$Html$Attributes$class('inline-flex justify-center w-full rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-indigo-500'),
-					$elm$html$Html$Attributes$id('menu-button'),
-					$fapian$elm_html_aria$Html$Attributes$Aria$ariaExpanded('true'),
-					$fapian$elm_html_aria$Html$Attributes$Aria$ariaHasPopup('true'),
-					$elm$html$Html$Events$onClick($author$project$Main$DropdownButtonClicked)
-				]),
-			_List_fromArray(
-				[
-					$elm$html$Html$text('Options'),
-					A2(
-					$elm$svg$Svg$svg,
-					_List_fromArray(
-						[
-							$elm$svg$Svg$Attributes$class('-mr-1 ml-2 h-5 w-5'),
-							$elm$svg$Svg$Attributes$viewBox('0 0 20 20'),
-							$elm$svg$Svg$Attributes$fill('currentColor'),
-							$fapian$elm_html_aria$Html$Attributes$Aria$ariaHidden(true)
-						]),
-					_List_fromArray(
-						[
-							A2(
-							$elm$svg$Svg$path,
-							_List_fromArray(
-								[
-									$elm$svg$Svg$Attributes$fillRule('evenodd'),
-									$elm$svg$Svg$Attributes$d('M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z'),
-									$elm$svg$Svg$Attributes$clipRule('evenodd')
-								]),
-							_List_Nil)
-						]))
-				]))
-		]));
-var $author$project$Main$ItemHovered = function (a) {
-	return {$: 'ItemHovered', a: a};
-};
-var $elm$html$Html$Attributes$action = function (uri) {
+var $elm$svg$Svg$pattern = $elm$svg$Svg$trustedNode('pattern');
+var $elm$svg$Svg$Attributes$patternUnits = _VirtualDom_attribute('patternUnits');
+var $elm$svg$Svg$rect = $elm$svg$Svg$trustedNode('rect');
+var $elm$html$Html$Attributes$src = function (url) {
 	return A2(
 		$elm$html$Html$Attributes$stringProperty,
-		'action',
-		_VirtualDom_noJavaScriptUri(uri));
+		'src',
+		_VirtualDom_noJavaScriptOrHtmlUri(url));
 };
-var $fapian$elm_html_aria$Html$Attributes$Aria$ariaLabelledby = $elm$html$Html$Attributes$attribute('aria-labelledby');
-var $elm$core$List$filter = F2(
-	function (isGood, list) {
-		return A3(
-			$elm$core$List$foldr,
-			F2(
-				function (x, xs) {
-					return isGood(x) ? A2($elm$core$List$cons, x, xs) : xs;
-				}),
-			_List_Nil,
-			list);
-	});
-var $elm$html$Html$Attributes$classList = function (classes) {
-	return $elm$html$Html$Attributes$class(
-		A2(
-			$elm$core$String$join,
-			' ',
-			A2(
-				$elm$core$List$map,
-				$elm$core$Tuple$first,
-				A2($elm$core$List$filter, $elm$core$Tuple$second, classes))));
-};
-var $elm$html$Html$form = _VirtualDom_node('form');
-var $elm$html$Html$Attributes$method = $elm$html$Html$Attributes$stringProperty('method');
-var $elm$html$Html$Events$onMouseEnter = function (msg) {
-	return A2(
-		$elm$html$Html$Events$on,
-		'mouseenter',
-		$elm$json$Json$Decode$succeed(msg));
-};
-var $fapian$elm_html_aria$Html$Attributes$Aria$role = $elm$html$Html$Attributes$attribute('role');
-var $elm$html$Html$Attributes$tabindex = function (n) {
-	return A2(
-		_VirtualDom_attribute,
-		'tabIndex',
-		$elm$core$String$fromInt(n));
-};
-var $author$project$Main$viewDropDownMenu = function (model) {
-	return _Utils_eq(model.dropdownStatus, $author$project$Main$Open) ? A2(
+var $elm$svg$Svg$Attributes$stroke = _VirtualDom_attribute('stroke');
+var $elm$svg$Svg$Attributes$strokeLinecap = _VirtualDom_attribute('stroke-linecap');
+var $elm$svg$Svg$Attributes$strokeLinejoin = _VirtualDom_attribute('stroke-linejoin');
+var $elm$svg$Svg$Attributes$strokeWidth = _VirtualDom_attribute('stroke-width');
+var $elm$svg$Svg$svg = $elm$svg$Svg$trustedNode('svg');
+var $elm$svg$Svg$Attributes$viewBox = _VirtualDom_attribute('viewBox');
+var $author$project$Hero$CloseMobileMenuButtonClicked = {$: 'CloseMobileMenuButtonClicked'};
+var $author$project$Hero$viewMobileMenu = function (model) {
+	return _Utils_eq(model.mobileMenuStatus, $author$project$Hero$Open) ? A2(
 		$elm$html$Html$div,
 		_List_fromArray(
 			[
-				$elm$html$Html$Attributes$class('origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none'),
-				$elm$html$Html$Attributes$class('dropdown-menu open'),
-				$fapian$elm_html_aria$Html$Attributes$Aria$role('menu'),
-				A2($elm$html$Html$Attributes$attribute, 'aria-orientation', 'vertical'),
-				$fapian$elm_html_aria$Html$Attributes$Aria$ariaLabelledby('menu-button'),
-				$elm$html$Html$Attributes$tabindex(-1)
+				$elm$html$Html$Attributes$class('absolute z-10 top-0 inset-x-0 p-2 transition transform origin-top-right md:hidden')
 			]),
 		_List_fromArray(
 			[
@@ -10705,129 +10631,163 @@ var $author$project$Main$viewDropDownMenu = function (model) {
 				$elm$html$Html$div,
 				_List_fromArray(
 					[
-						$elm$html$Html$Attributes$class('py-1'),
-						$fapian$elm_html_aria$Html$Attributes$Aria$role('none')
+						$elm$html$Html$Attributes$class('rounded-lg shadow-md bg-white ring-1 ring-black ring-opacity-5 overflow-hidden')
 					]),
 				_List_fromArray(
 					[
 						A2(
-						$elm$html$Html$a,
+						$elm$html$Html$div,
 						_List_fromArray(
 							[
-								$elm$html$Html$Attributes$href('#'),
-								$elm$html$Html$Attributes$class('text-gray-700 block px-4 py-2 text-sm'),
-								$elm$html$Html$Attributes$class('menu-item'),
-								$elm$html$Html$Attributes$classList(
-								_List_fromArray(
-									[
-										_Utils_Tuple2('text-gray-900', model.hoveredItem === 'menu-item-0'),
-										_Utils_Tuple2('bg-gray-100', model.hoveredItem === 'menu-item-0')
-									])),
-								$fapian$elm_html_aria$Html$Attributes$Aria$role('menuitem'),
-								$elm$html$Html$Attributes$tabindex(-1),
-								$elm$html$Html$Attributes$id('menu-item-0'),
-								$elm$html$Html$Events$onMouseEnter(
-								$author$project$Main$ItemHovered('menu-item-0'))
-							]),
-						_List_fromArray(
-							[
-								$elm$html$Html$text('Account Settings')
-							])),
-						A2(
-						$elm$html$Html$a,
-						_List_fromArray(
-							[
-								$elm$html$Html$Attributes$href('#'),
-								$elm$html$Html$Attributes$class('text-gray-700 block px-4 py-2 text-sm'),
-								$elm$html$Html$Attributes$class('menu-item'),
-								$elm$html$Html$Attributes$classList(
-								_List_fromArray(
-									[
-										_Utils_Tuple2('text-gray-900', model.hoveredItem === 'menu-item-1'),
-										_Utils_Tuple2('bg-gray-100', model.hoveredItem === 'menu-item-1')
-									])),
-								$fapian$elm_html_aria$Html$Attributes$Aria$role('menuitem'),
-								$elm$html$Html$Attributes$tabindex(-1),
-								$elm$html$Html$Attributes$id('menu-item-1'),
-								$elm$html$Html$Events$onMouseEnter(
-								$author$project$Main$ItemHovered('menu-item-1'))
-							]),
-						_List_fromArray(
-							[
-								$elm$html$Html$text('Support')
-							])),
-						A2(
-						$elm$html$Html$a,
-						_List_fromArray(
-							[
-								$elm$html$Html$Attributes$href('#'),
-								$elm$html$Html$Attributes$class('text-gray-700 block px-4 py-2 text-sm'),
-								$elm$html$Html$Attributes$class('menu-item'),
-								$elm$html$Html$Attributes$classList(
-								_List_fromArray(
-									[
-										_Utils_Tuple2('text-gray-900', model.hoveredItem === 'menu-item-2'),
-										_Utils_Tuple2('bg-gray-100', model.hoveredItem === 'menu-item-2')
-									])),
-								$fapian$elm_html_aria$Html$Attributes$Aria$role('menuitem'),
-								$elm$html$Html$Attributes$tabindex(-1),
-								$elm$html$Html$Attributes$id('menu-item-2'),
-								$elm$html$Html$Events$onMouseEnter(
-								$author$project$Main$ItemHovered('menu-item-2'))
-							]),
-						_List_fromArray(
-							[
-								$elm$html$Html$text('License')
-							])),
-						A2(
-						$elm$html$Html$form,
-						_List_fromArray(
-							[
-								$elm$html$Html$Attributes$method('POST'),
-								$elm$html$Html$Attributes$action('#'),
-								$fapian$elm_html_aria$Html$Attributes$Aria$role('none')
+								$elm$html$Html$Attributes$class('px-5 pt-4 flex items-center justify-between')
 							]),
 						_List_fromArray(
 							[
 								A2(
-								$elm$html$Html$button,
+								$elm$html$Html$div,
+								_List_Nil,
 								_List_fromArray(
 									[
-										$elm$html$Html$Attributes$type_('submit'),
-										$elm$html$Html$Attributes$class('text-gray-700 block w-full text-left px-4 py-2 text-sm'),
-										$elm$html$Html$Attributes$class('menu-item'),
-										$elm$html$Html$Attributes$classList(
+										A2(
+										$elm$html$Html$img,
 										_List_fromArray(
 											[
-												_Utils_Tuple2('text-gray-900', model.hoveredItem === 'menu-item-3'),
-												_Utils_Tuple2('bg-gray-100', model.hoveredItem === 'menu-item-3')
-											])),
-										$fapian$elm_html_aria$Html$Attributes$Aria$role('menuitem'),
-										$elm$html$Html$Attributes$tabindex(-1),
-										$elm$html$Html$Attributes$id('menu-item-3'),
-										$elm$html$Html$Events$onMouseEnter(
-										$author$project$Main$ItemHovered('menu-item-3'))
+												$elm$html$Html$Attributes$class('h-8 w-auto'),
+												$elm$html$Html$Attributes$src('https://tailwindui.com/img/logos/workflow-mark-indigo-600.svg'),
+												$elm$html$Html$Attributes$alt('')
+											]),
+										_List_Nil)
+									])),
+								A2(
+								$elm$html$Html$div,
+								_List_fromArray(
+									[
+										$elm$html$Html$Attributes$class('-mr-2')
 									]),
 								_List_fromArray(
 									[
-										$elm$html$Html$text('Sign out')
+										A2(
+										$elm$html$Html$button,
+										_List_fromArray(
+											[
+												$elm$html$Html$Attributes$type_('button'),
+												$elm$html$Html$Attributes$class('bg-white rounded-md p-2 inline-flex items-center justify-center text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500'),
+												$elm$html$Html$Events$onClick($author$project$Hero$CloseMobileMenuButtonClicked)
+											]),
+										_List_fromArray(
+											[
+												A2(
+												$elm$html$Html$span,
+												_List_fromArray(
+													[
+														$elm$html$Html$Attributes$class('sr-only')
+													]),
+												_List_fromArray(
+													[
+														$elm$html$Html$text('Close menu')
+													])),
+												A2(
+												$elm$svg$Svg$svg,
+												_List_fromArray(
+													[
+														$elm$svg$Svg$Attributes$class('h-6 w-6'),
+														$elm$svg$Svg$Attributes$fill('none'),
+														$elm$svg$Svg$Attributes$viewBox('0 0 24 24'),
+														$elm$svg$Svg$Attributes$stroke('currentColor'),
+														$fapian$elm_html_aria$Html$Attributes$Aria$ariaHidden(true)
+													]),
+												_List_fromArray(
+													[
+														A2(
+														$elm$svg$Svg$path,
+														_List_fromArray(
+															[
+																$elm$svg$Svg$Attributes$strokeLinecap('round'),
+																$elm$svg$Svg$Attributes$strokeLinejoin('round'),
+																$elm$svg$Svg$Attributes$strokeWidth('2'),
+																$elm$svg$Svg$Attributes$d('M6 18L18 6M6 6l12 12')
+															]),
+														_List_Nil)
+													]))
+											]))
 									]))
+							])),
+						A2(
+						$elm$html$Html$div,
+						_List_fromArray(
+							[
+								$elm$html$Html$Attributes$class('px-2 pt-2 pb-3')
+							]),
+						_List_fromArray(
+							[
+								A2(
+								$elm$html$Html$a,
+								_List_fromArray(
+									[
+										$elm$html$Html$Attributes$href('#'),
+										$elm$html$Html$Attributes$class('block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50')
+									]),
+								_List_fromArray(
+									[
+										$elm$html$Html$text('Product')
+									])),
+								A2(
+								$elm$html$Html$a,
+								_List_fromArray(
+									[
+										$elm$html$Html$Attributes$href('#'),
+										$elm$html$Html$Attributes$class('block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50')
+									]),
+								_List_fromArray(
+									[
+										$elm$html$Html$text('Features')
+									])),
+								A2(
+								$elm$html$Html$a,
+								_List_fromArray(
+									[
+										$elm$html$Html$Attributes$href('#'),
+										$elm$html$Html$Attributes$class('block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50')
+									]),
+								_List_fromArray(
+									[
+										$elm$html$Html$text('Marketplace')
+									])),
+								A2(
+								$elm$html$Html$a,
+								_List_fromArray(
+									[
+										$elm$html$Html$Attributes$href('#'),
+										$elm$html$Html$Attributes$class('block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50')
+									]),
+								_List_fromArray(
+									[
+										$elm$html$Html$text('Company')
+									]))
+							])),
+						A2(
+						$elm$html$Html$a,
+						_List_fromArray(
+							[
+								$elm$html$Html$Attributes$href('#'),
+								$elm$html$Html$Attributes$class('block w-full px-5 py-3 text-center font-medium text-indigo-600 bg-gray-50 hover:bg-gray-100')
+							]),
+						_List_fromArray(
+							[
+								$elm$html$Html$text('Log in')
 							]))
 					]))
-			])) : A2(
-		$elm$html$Html$div,
-		_List_fromArray(
-			[
-				$elm$html$Html$Attributes$class('dropdown-menu')
-			]),
-		_List_Nil);
+			])) : A2($elm$html$Html$div, _List_Nil, _List_Nil);
 };
-var $author$project$Main$viewDropDown = function (model) {
+var $elm$svg$Svg$Attributes$width = _VirtualDom_attribute('width');
+var $elm$svg$Svg$Attributes$x = _VirtualDom_attribute('x');
+var $elm$svg$Svg$Attributes$y = _VirtualDom_attribute('y');
+var $author$project$Hero$view = function (model) {
 	return A2(
 		$elm$html$Html$div,
 		_List_fromArray(
 			[
-				$elm$html$Html$Attributes$class('center')
+				$elm$html$Html$Attributes$class('relative bg-gray-50 overflow-hidden')
 			]),
 		_List_fromArray(
 			[
@@ -10835,19 +10795,455 @@ var $author$project$Main$viewDropDown = function (model) {
 				$elm$html$Html$div,
 				_List_fromArray(
 					[
-						$elm$html$Html$Attributes$class('relative inline-block text-left')
+						$elm$html$Html$Attributes$class('hidden sm:block sm:absolute sm:inset-y-0 sm:h-full sm:w-full'),
+						$fapian$elm_html_aria$Html$Attributes$Aria$ariaHidden(true)
 					]),
 				_List_fromArray(
 					[
-						$author$project$Main$viewDropDownButton,
-						$author$project$Main$viewDropDownMenu(model)
+						A2(
+						$elm$html$Html$div,
+						_List_fromArray(
+							[
+								$elm$html$Html$Attributes$class('relative h-full max-w-7xl mx-auto')
+							]),
+						_List_fromArray(
+							[
+								A2(
+								$elm$svg$Svg$svg,
+								_List_fromArray(
+									[
+										$elm$svg$Svg$Attributes$class('absolute right-full transform translate-y-1/4 translate-x-1/4 lg:translate-x-1/2'),
+										$elm$svg$Svg$Attributes$width('404'),
+										$elm$svg$Svg$Attributes$height('784'),
+										$elm$svg$Svg$Attributes$fill('none'),
+										$elm$svg$Svg$Attributes$viewBox('0 0 404 784')
+									]),
+								_List_fromArray(
+									[
+										A2(
+										$elm$svg$Svg$defs,
+										_List_Nil,
+										_List_fromArray(
+											[
+												A2(
+												$elm$svg$Svg$pattern,
+												_List_fromArray(
+													[
+														$elm$svg$Svg$Attributes$id('f210dbf6-a58d-4871-961e-36d5016a0f49'),
+														$elm$svg$Svg$Attributes$x('0'),
+														$elm$svg$Svg$Attributes$y('0'),
+														$elm$svg$Svg$Attributes$width('20'),
+														$elm$svg$Svg$Attributes$height('20'),
+														$elm$svg$Svg$Attributes$patternUnits('userSpaceOnUse')
+													]),
+												_List_fromArray(
+													[
+														A2(
+														$elm$svg$Svg$rect,
+														_List_fromArray(
+															[
+																$elm$svg$Svg$Attributes$x('0'),
+																$elm$svg$Svg$Attributes$y('0'),
+																$elm$svg$Svg$Attributes$width('4'),
+																$elm$svg$Svg$Attributes$height('4'),
+																$elm$svg$Svg$Attributes$class('text-gray-200'),
+																$elm$svg$Svg$Attributes$fill('currentColor')
+															]),
+														_List_Nil)
+													]))
+											])),
+										A2(
+										$elm$svg$Svg$rect,
+										_List_fromArray(
+											[
+												$elm$svg$Svg$Attributes$width('404'),
+												$elm$svg$Svg$Attributes$height('784'),
+												$elm$svg$Svg$Attributes$fill('url(#f210dbf6-a58d-4871-961e-36d5016a0f49)')
+											]),
+										_List_Nil)
+									])),
+								A2(
+								$elm$svg$Svg$svg,
+								_List_fromArray(
+									[
+										$elm$svg$Svg$Attributes$class('absolute left-full transform -translate-y-3/4 -translate-x-1/4 md:-translate-y-1/2 lg:-translate-x-1/2'),
+										$elm$svg$Svg$Attributes$width('404'),
+										$elm$svg$Svg$Attributes$height('784'),
+										$elm$svg$Svg$Attributes$fill('none'),
+										$elm$svg$Svg$Attributes$viewBox('0 0 404 784')
+									]),
+								_List_fromArray(
+									[
+										A2(
+										$elm$svg$Svg$defs,
+										_List_Nil,
+										_List_fromArray(
+											[
+												A2(
+												$elm$svg$Svg$pattern,
+												_List_fromArray(
+													[
+														$elm$svg$Svg$Attributes$id('5d0dd344-b041-4d26-bec4-8d33ea57ec9b'),
+														$elm$svg$Svg$Attributes$x('0'),
+														$elm$svg$Svg$Attributes$y('0'),
+														$elm$svg$Svg$Attributes$width('20'),
+														$elm$svg$Svg$Attributes$height('20'),
+														$elm$svg$Svg$Attributes$patternUnits('userSpaceOnUse')
+													]),
+												_List_fromArray(
+													[
+														A2(
+														$elm$svg$Svg$rect,
+														_List_fromArray(
+															[
+																$elm$svg$Svg$Attributes$x('0'),
+																$elm$svg$Svg$Attributes$y('0'),
+																$elm$svg$Svg$Attributes$width('4'),
+																$elm$svg$Svg$Attributes$height('4'),
+																$elm$svg$Svg$Attributes$class('text-gray-200'),
+																$elm$svg$Svg$Attributes$fill('currentColor')
+															]),
+														_List_Nil)
+													]))
+											])),
+										A2(
+										$elm$svg$Svg$rect,
+										_List_fromArray(
+											[
+												$elm$svg$Svg$Attributes$width('404'),
+												$elm$svg$Svg$Attributes$height('784'),
+												$elm$svg$Svg$Attributes$fill('url(#5d0dd344-b041-4d26-bec4-8d33ea57ec9b)')
+											]),
+										_List_Nil)
+									]))
+							]))
+					])),
+				A2(
+				$elm$html$Html$div,
+				_List_fromArray(
+					[
+						$elm$html$Html$Attributes$class('relative pt-6 pb-16 sm:pb-24')
+					]),
+				_List_fromArray(
+					[
+						A2(
+						$elm$html$Html$div,
+						_List_Nil,
+						_List_fromArray(
+							[
+								A2(
+								$elm$html$Html$div,
+								_List_fromArray(
+									[
+										$elm$html$Html$Attributes$class('max-w-7xl mx-auto px-4 sm:px-6')
+									]),
+								_List_fromArray(
+									[
+										A2(
+										$elm$html$Html$nav,
+										_List_fromArray(
+											[
+												$elm$html$Html$Attributes$class('relative flex items-center justify-between sm:h-10 md:justify-center'),
+												$fapian$elm_html_aria$Html$Attributes$Aria$ariaLabel('Global')
+											]),
+										_List_fromArray(
+											[
+												A2(
+												$elm$html$Html$div,
+												_List_fromArray(
+													[
+														$elm$html$Html$Attributes$class('flex items-center flex-1 md:absolute md:inset-y-0 md:left-0')
+													]),
+												_List_fromArray(
+													[
+														A2(
+														$elm$html$Html$div,
+														_List_fromArray(
+															[
+																$elm$html$Html$Attributes$class('flex items-center justify-between w-full md:w-auto')
+															]),
+														_List_fromArray(
+															[
+																A2(
+																$elm$html$Html$a,
+																_List_fromArray(
+																	[
+																		$elm$html$Html$Attributes$href('#')
+																	]),
+																_List_fromArray(
+																	[
+																		A2(
+																		$elm$html$Html$span,
+																		_List_fromArray(
+																			[
+																				$elm$html$Html$Attributes$class('sr-only')
+																			]),
+																		_List_fromArray(
+																			[
+																				$elm$html$Html$text('Workflow')
+																			])),
+																		A2(
+																		$elm$html$Html$img,
+																		_List_fromArray(
+																			[
+																				$elm$html$Html$Attributes$class('h-8 w-auto sm:h-10'),
+																				$elm$html$Html$Attributes$src('https://tailwindui.com/img/logos/workflow-mark-indigo-600.svg'),
+																				$elm$html$Html$Attributes$alt('')
+																			]),
+																		_List_Nil)
+																	])),
+																A2(
+																$elm$html$Html$div,
+																_List_fromArray(
+																	[
+																		$elm$html$Html$Attributes$class('-mr-2 flex items-center md:hidden')
+																	]),
+																_List_fromArray(
+																	[
+																		A2(
+																		$elm$html$Html$button,
+																		_List_fromArray(
+																			[
+																				$elm$html$Html$Attributes$type_('button'),
+																				$elm$html$Html$Attributes$class('bg-gray-50 rounded-md p-2 inline-flex items-center justify-center text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500'),
+																				$fapian$elm_html_aria$Html$Attributes$Aria$ariaExpanded('false'),
+																				$elm$html$Html$Events$onClick($author$project$Hero$MobileMenuButtonClicked)
+																			]),
+																		_List_fromArray(
+																			[
+																				A2(
+																				$elm$html$Html$span,
+																				_List_fromArray(
+																					[
+																						$elm$html$Html$Attributes$class('sr-only')
+																					]),
+																				_List_fromArray(
+																					[
+																						$elm$html$Html$text('Open main menu')
+																					])),
+																				A2(
+																				$elm$svg$Svg$svg,
+																				_List_fromArray(
+																					[
+																						$elm$svg$Svg$Attributes$class('h-6 w-6'),
+																						$elm$svg$Svg$Attributes$fill('none'),
+																						$elm$svg$Svg$Attributes$viewBox('0 0 24 24'),
+																						$elm$svg$Svg$Attributes$stroke('currentColor'),
+																						$fapian$elm_html_aria$Html$Attributes$Aria$ariaHidden(true)
+																					]),
+																				_List_fromArray(
+																					[
+																						A2(
+																						$elm$svg$Svg$path,
+																						_List_fromArray(
+																							[
+																								$elm$svg$Svg$Attributes$strokeLinecap('round'),
+																								$elm$svg$Svg$Attributes$strokeLinejoin('round'),
+																								$elm$svg$Svg$Attributes$strokeWidth('2'),
+																								$elm$svg$Svg$Attributes$d('M4 6h16M4 12h16M4 18h16')
+																							]),
+																						_List_Nil)
+																					]))
+																			]))
+																	]))
+															]))
+													])),
+												A2(
+												$elm$html$Html$div,
+												_List_fromArray(
+													[
+														$elm$html$Html$Attributes$class('hidden md:flex md:space-x-10')
+													]),
+												_List_fromArray(
+													[
+														A2(
+														$elm$html$Html$a,
+														_List_fromArray(
+															[
+																$elm$html$Html$Attributes$href('#'),
+																$elm$html$Html$Attributes$class('font-medium text-gray-500 hover:text-gray-900')
+															]),
+														_List_fromArray(
+															[
+																$elm$html$Html$text('Product')
+															])),
+														A2(
+														$elm$html$Html$a,
+														_List_fromArray(
+															[
+																$elm$html$Html$Attributes$href('#'),
+																$elm$html$Html$Attributes$class('font-medium text-gray-500 hover:text-gray-900')
+															]),
+														_List_fromArray(
+															[
+																$elm$html$Html$text('Features')
+															])),
+														A2(
+														$elm$html$Html$a,
+														_List_fromArray(
+															[
+																$elm$html$Html$Attributes$href('#'),
+																$elm$html$Html$Attributes$class('font-medium text-gray-500 hover:text-gray-900')
+															]),
+														_List_fromArray(
+															[
+																$elm$html$Html$text('Marketplace')
+															])),
+														A2(
+														$elm$html$Html$a,
+														_List_fromArray(
+															[
+																$elm$html$Html$Attributes$href('#'),
+																$elm$html$Html$Attributes$class('font-medium text-gray-500 hover:text-gray-900')
+															]),
+														_List_fromArray(
+															[
+																$elm$html$Html$text('Company')
+															]))
+													])),
+												A2(
+												$elm$html$Html$div,
+												_List_fromArray(
+													[
+														$elm$html$Html$Attributes$class('hidden md:absolute md:flex md:items-center md:justify-end md:inset-y-0 md:right-0')
+													]),
+												_List_fromArray(
+													[
+														A2(
+														$elm$html$Html$span,
+														_List_fromArray(
+															[
+																$elm$html$Html$Attributes$class('inline-flex rounded-md shadow')
+															]),
+														_List_fromArray(
+															[
+																A2(
+																$elm$html$Html$a,
+																_List_fromArray(
+																	[
+																		$elm$html$Html$Attributes$href('#'),
+																		$elm$html$Html$Attributes$class('inline-flex items-center px-4 py-2 border border-transparent text-base font-medium rounded-md text-indigo-600 bg-white hover:bg-gray-50')
+																	]),
+																_List_fromArray(
+																	[
+																		$elm$html$Html$text('Log in')
+																	]))
+															]))
+													]))
+											]))
+									])),
+								$author$project$Hero$viewMobileMenu(model)
+							])),
+						A2(
+						$elm$html$Html$main_,
+						_List_fromArray(
+							[
+								$elm$html$Html$Attributes$class('mt-16 mx-auto max-w-7xl px-4 sm:mt-24')
+							]),
+						_List_fromArray(
+							[
+								A2(
+								$elm$html$Html$div,
+								_List_fromArray(
+									[
+										$elm$html$Html$Attributes$class('text-center')
+									]),
+								_List_fromArray(
+									[
+										A2(
+										$elm$html$Html$h1,
+										_List_fromArray(
+											[
+												$elm$html$Html$Attributes$class('text-4xl tracking-tight font-extrabold text-gray-900 sm:text-5xl md:text-6xl')
+											]),
+										_List_fromArray(
+											[
+												A2(
+												$elm$html$Html$span,
+												_List_fromArray(
+													[
+														$elm$html$Html$Attributes$class('block xl:inline')
+													]),
+												_List_fromArray(
+													[
+														$elm$html$Html$text('Data to enrich your')
+													])),
+												A2(
+												$elm$html$Html$span,
+												_List_fromArray(
+													[
+														$elm$html$Html$Attributes$class('block text-indigo-600 xl:inline')
+													]),
+												_List_fromArray(
+													[
+														$elm$html$Html$text(' online business')
+													]))
+											])),
+										A2(
+										$elm$html$Html$p,
+										_List_fromArray(
+											[
+												$elm$html$Html$Attributes$class('mt-3 max-w-md mx-auto text-base text-gray-500 sm:text-lg md:mt-5 md:text-xl md:max-w-3xl')
+											]),
+										_List_fromArray(
+											[
+												$elm$html$Html$text('Anim aute id magna aliqua ad ad non deserunt sunt. Qui irure qui lorem cupidatat commodo. Elit sunt amet fugiat veniam occaecat fugiat aliqua.')
+											])),
+										A2(
+										$elm$html$Html$div,
+										_List_fromArray(
+											[
+												$elm$html$Html$Attributes$class('mt-5 max-w-md mx-auto sm:flex sm:justify-center md:mt-8')
+											]),
+										_List_fromArray(
+											[
+												A2(
+												$elm$html$Html$div,
+												_List_fromArray(
+													[
+														$elm$html$Html$Attributes$class('rounded-md shadow')
+													]),
+												_List_fromArray(
+													[
+														A2(
+														$elm$html$Html$a,
+														_List_fromArray(
+															[
+																$elm$html$Html$Attributes$href('#'),
+																$elm$html$Html$Attributes$class('w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 md:py-4 md:text-lg md:px-10')
+															]),
+														_List_fromArray(
+															[
+																$elm$html$Html$text('Get started')
+															]))
+													])),
+												A2(
+												$elm$html$Html$div,
+												_List_fromArray(
+													[
+														$elm$html$Html$Attributes$class('mt-3 rounded-md shadow sm:mt-0 sm:ml-3')
+													]),
+												_List_fromArray(
+													[
+														A2(
+														$elm$html$Html$a,
+														_List_fromArray(
+															[
+																$elm$html$Html$Attributes$href('#'),
+																$elm$html$Html$Attributes$class('w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-indigo-600 bg-white hover:bg-gray-50 md:py-4 md:text-lg md:px-10')
+															]),
+														_List_fromArray(
+															[
+																$elm$html$Html$text('Live demo')
+															]))
+													]))
+											]))
+									]))
+							]))
 					]))
 			]));
 };
-var $author$project$Main$view = function (model) {
-	return $author$project$Main$viewDropDown(model);
-};
-var $author$project$Main$main = $elm$browser$Browser$element(
-	{init: $author$project$Main$init, subscriptions: $author$project$Main$subscriptions, update: $author$project$Main$update, view: $author$project$Main$view});
-_Platform_export({'Main':{'init':$author$project$Main$main(
-	$elm$json$Json$Decode$succeed(_Utils_Tuple0))({"versions":{"elm":"0.19.1"},"types":{"message":"Main.Msg","aliases":{},"unions":{"Main.Msg":{"args":[],"tags":{"DropdownButtonClicked":[],"ItemHovered":["String.String"]}},"String.String":{"args":[],"tags":{"String":[]}}}}})}});}(this));
+var $author$project$Hero$main = $elm$browser$Browser$element(
+	{init: $author$project$Hero$init, subscriptions: $author$project$Hero$subscriptions, update: $author$project$Hero$update, view: $author$project$Hero$view});
+_Platform_export({'Hero':{'init':$author$project$Hero$main(
+	$elm$json$Json$Decode$succeed(_Utils_Tuple0))({"versions":{"elm":"0.19.1"},"types":{"message":"Hero.Msg","aliases":{},"unions":{"Hero.Msg":{"args":[],"tags":{"MobileMenuButtonClicked":[],"CloseMobileMenuButtonClicked":[]}}}}})}});}(this));
