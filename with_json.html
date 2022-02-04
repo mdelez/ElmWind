@@ -3,8 +3,8 @@
 
 <head>
     <link rel="stylesheet" href="https://rsms.me/inter/inter.css">
-    <link rel="stylesheet" href="/dist/output.css">
-    <link rel="stylesheet" href="/elmwind.css">
+    <link rel="stylesheet" href="./dist/output.css">
+    <link rel="stylesheet" href="./elmwind.css">
 </head>
 
 <body>
@@ -12,9 +12,13 @@
     <script src="dropdown.js"></script>
     <script type="text/javascript" src="test_data.json"></script>
     <script>
-        console.log(data);
-        Elm.Dropdown.init({ node: document.getElementById("app"),
-        flags: data.dropdown.header
-    });
+        for (var i in data){
+            if (i == "dropdown"){
+                console.log(data[i])
+                Elm.Dropdown.init({ node: document.getElementById("app"),
+                flags: JSON.stringify(data[i])
+                });
+            }
+        }
     </script>
 </body>

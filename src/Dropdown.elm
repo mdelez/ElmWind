@@ -7,8 +7,18 @@ import Html.Attributes.Aria exposing (ariaExpanded, ariaHasPopup, ariaHidden, ar
 import Html.Events exposing (onClick, onMouseEnter)
 import Svg exposing (path, svg)
 import Svg.Attributes as SvgAttr exposing (clipRule, d, fill, fillRule, viewBox)
-
-
+import Json.Decode exposing ( Decoder
+        , decodeString
+        , field
+        , int
+        , list
+        , map2
+        , string
+        , succeed
+        )
+import Debug exposing (log)
+import Json.Decode.Pipeline exposing (optional, required)
+import Json.Decode exposing (bool)
 type DropdownStatus
     = Open
     | Closed
@@ -17,9 +27,17 @@ type DropdownStatus
 type alias Model =
     { dropdownStatus : DropdownStatus
     , hoveredItem : String
-    , header: String
+    , input : Input
     }
 
+type alias Option =
+    { text : String
+    , is_button : Bool
+    }
+type alias Input  = 
+    { header : String
+    , options : List Option
+    }
 
 view : Model -> Html Msg
 view model =
@@ -47,7 +65,7 @@ viewDropDownButton model =
             , ariaHasPopup "true"
             , onClick DropdownButtonClicked
             ]
-            [ text model.header
+            [ text model.input.header
             , svg
                 [ SvgAttr.class "-mr-1 ml-2 h-5 w-5"
                 , viewBox "0 0 20 20"
@@ -85,12 +103,13 @@ viewDropDownMenu model =
             , Attr.attribute "aria-orientation" "vertical"
             , ariaLabelledby "menu-button"
             , tabindex -1
-            ]
+            ] 
             [ div
                 [ class "py-1"
                 , role "none"
                 ]
-                [ a
+                (List.indexedMap (viewOption model) model.input.options)
+                {-[ a
                     [ href "#"
                     , class "text-gray-700 block px-4 py-2 text-sm"
                     , class "menu-item"
@@ -103,7 +122,7 @@ viewDropDownMenu model =
                     , id "menu-item-0"
                     , onMouseEnter (ItemHovered "menu-item-0")
                     ]
-                    [ text "Account Settings" ]
+                    [ text "Option 1" ]
                 , a
                     [ href "#"
                     , class "text-gray-700 block px-4 py-2 text-sm"
@@ -117,7 +136,7 @@ viewDropDownMenu model =
                     , id "menu-item-1"
                     , onMouseEnter (ItemHovered "menu-item-1")
                     ]
-                    [ text "Support" ]
+                    [ text "Option 2" ]
                 , a
                     [ href "#"
                     , class "text-gray-700 block px-4 py-2 text-sm"
@@ -152,17 +171,73 @@ viewDropDownMenu model =
                         ]
                         [ text "Sign out" ]
                     ]
-                ]
+                ]-}
             ]
-
     else
         div [ class "dropdown-menu" ] []
 
+viewOption: Model -> Int -> Option -> Html Msg
+viewOption model index option = 
+    if option.is_button then
+        form
+                [ method "POST"
+                    , Attr.action "#"
+                    , role "none"
+                ]
+                [ button
+                    [ type_ "submit"
+                        , class "text-gray-700 block w-full text-left px-4 py-2 text-sm"
+                        , class "menu-item"
+                        , classList
+                        [ ("text-gray-900", model.hoveredItem == "menu-item-" ++ String.fromInt(index))
+                            , ("bg-gray-100", model.hoveredItem == "menu-item-" ++ String.fromInt(index))
+                        ]
+                        , role "menuitem"
+                        , tabindex -1
+                        , id ("menu-item-" ++ String.fromInt(index))
+                        , onMouseEnter (ItemHovered ("menu-item-" ++ String.fromInt(index)))
+                    ]
+                    [ text option.text ]
+                ]
+    else
+        a
+            [ href "#"
+                , class "text-gray-700 block px-4 py-2 text-sm"
+                , class "menu-item"
+                , classList
+                    [ ("text-gray-900", model.hoveredItem == "menu-item-" ++ String.fromInt(index))
+                        , ("bg-gray-100", model.hoveredItem == "menu-item-" ++ String.fromInt(index))
+                    ]
+                , role "menuitem"
+                , tabindex -1
+                , id ("menu-item-" ++ String.fromInt(index))
+                , onMouseEnter (ItemHovered ("menu-item-" ++ String.fromInt(index)))
+            ]
+            [ text option.text ]
 
+listDecoder : Json.Decode.Decoder (List Option)
+listDecoder = 
+    Json.Decode.list optionDecoder
+optionDecoder : Json.Decode.Decoder Option
+optionDecoder =
+    Json.Decode.map2 Option
+    (field "text" string)
+    (field "is_button" bool)
+inputDecoder: Json.Decode.Decoder Input
+inputDecoder  = 
+    Json.Decode.map2 Input
+    (field "header" string)
+    (field "options" listDecoder)
+buildInput: String -> Input
+buildInput input =
+    case (Json.Decode.decodeString inputDecoder input) of
+        Ok res ->
+            res
+        _ ->
+            ({header = input, options = []})
 init : String -> ( Model, Cmd msg )
 init input =
-    ( { header = input, dropdownStatus = Closed, hoveredItem = "" }, Cmd.none )
-
+    ( { input = (buildInput input), dropdownStatus = Closed, hoveredItem = "" }, Cmd.none )
 
 type Msg
     = DropdownButtonClicked

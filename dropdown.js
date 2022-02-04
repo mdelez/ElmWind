@@ -5145,14 +5145,50 @@ var $elm$core$Task$perform = F2(
 	});
 var $elm$browser$Browser$element = _Browser_element;
 var $author$project$Dropdown$Closed = {$: 'Closed'};
+var $elm$json$Json$Decode$decodeString = _Json_runOnString;
+var $author$project$Dropdown$Input = F2(
+	function (header, options) {
+		return {header: header, options: options};
+	});
+var $elm$json$Json$Decode$field = _Json_decodeField;
+var $elm$json$Json$Decode$list = _Json_decodeList;
+var $author$project$Dropdown$Option = F2(
+	function (text, is_button) {
+		return {is_button: is_button, text: text};
+	});
+var $elm$json$Json$Decode$bool = _Json_decodeBool;
+var $elm$json$Json$Decode$string = _Json_decodeString;
+var $author$project$Dropdown$optionDecoder = A3(
+	$elm$json$Json$Decode$map2,
+	$author$project$Dropdown$Option,
+	A2($elm$json$Json$Decode$field, 'text', $elm$json$Json$Decode$string),
+	A2($elm$json$Json$Decode$field, 'is_button', $elm$json$Json$Decode$bool));
+var $author$project$Dropdown$listDecoder = $elm$json$Json$Decode$list($author$project$Dropdown$optionDecoder);
+var $author$project$Dropdown$inputDecoder = A3(
+	$elm$json$Json$Decode$map2,
+	$author$project$Dropdown$Input,
+	A2($elm$json$Json$Decode$field, 'header', $elm$json$Json$Decode$string),
+	A2($elm$json$Json$Decode$field, 'options', $author$project$Dropdown$listDecoder));
+var $author$project$Dropdown$buildInput = function (input) {
+	var _v0 = A2($elm$json$Json$Decode$decodeString, $author$project$Dropdown$inputDecoder, input);
+	if (_v0.$ === 'Ok') {
+		var res = _v0.a;
+		return res;
+	} else {
+		return {header: input, options: _List_Nil};
+	}
+};
 var $elm$core$Platform$Cmd$batch = _Platform_batch;
 var $elm$core$Platform$Cmd$none = $elm$core$Platform$Cmd$batch(_List_Nil);
 var $author$project$Dropdown$init = function (input) {
 	return _Utils_Tuple2(
-		{dropdownStatus: $author$project$Dropdown$Closed, header: input, hoveredItem: ''},
+		{
+			dropdownStatus: $author$project$Dropdown$Closed,
+			hoveredItem: '',
+			input: $author$project$Dropdown$buildInput(input)
+		},
 		$elm$core$Platform$Cmd$none);
 };
-var $elm$json$Json$Decode$string = _Json_decodeString;
 var $elm$core$Platform$Sub$batch = _Platform_batch;
 var $elm$core$Platform$Sub$none = $elm$core$Platform$Sub$batch(_List_Nil);
 var $author$project$Dropdown$subscriptions = function (model) {
@@ -5268,7 +5304,7 @@ var $author$project$Dropdown$viewDropDownButton = function (model) {
 					]),
 				_List_fromArray(
 					[
-						$elm$html$Html$text(model.header),
+						$elm$html$Html$text(model.input.header),
 						A2(
 						$elm$svg$Svg$svg,
 						_List_fromArray(
@@ -5293,6 +5329,17 @@ var $author$project$Dropdown$viewDropDownButton = function (model) {
 					]))
 			]));
 };
+var $fapian$elm_html_aria$Html$Attributes$Aria$ariaLabelledby = $elm$html$Html$Attributes$attribute('aria-labelledby');
+var $elm$core$Basics$negate = function (n) {
+	return -n;
+};
+var $fapian$elm_html_aria$Html$Attributes$Aria$role = $elm$html$Html$Attributes$attribute('role');
+var $elm$html$Html$Attributes$tabindex = function (n) {
+	return A2(
+		_VirtualDom_attribute,
+		'tabIndex',
+		$elm$core$String$fromInt(n));
+};
 var $author$project$Dropdown$ItemHovered = function (a) {
 	return {$: 'ItemHovered', a: a};
 };
@@ -5303,7 +5350,6 @@ var $elm$html$Html$Attributes$action = function (uri) {
 		'action',
 		_VirtualDom_noJavaScriptUri(uri));
 };
-var $fapian$elm_html_aria$Html$Attributes$Aria$ariaLabelledby = $elm$html$Html$Attributes$attribute('aria-labelledby');
 var $elm$core$List$filter = F2(
 	function (isGood, list) {
 		return A3(
@@ -5337,22 +5383,91 @@ var $elm$html$Html$Attributes$href = function (url) {
 		_VirtualDom_noJavaScriptUri(url));
 };
 var $elm$html$Html$Attributes$method = $elm$html$Html$Attributes$stringProperty('method');
-var $elm$core$Basics$negate = function (n) {
-	return -n;
-};
 var $elm$html$Html$Events$onMouseEnter = function (msg) {
 	return A2(
 		$elm$html$Html$Events$on,
 		'mouseenter',
 		$elm$json$Json$Decode$succeed(msg));
 };
-var $fapian$elm_html_aria$Html$Attributes$Aria$role = $elm$html$Html$Attributes$attribute('role');
-var $elm$html$Html$Attributes$tabindex = function (n) {
-	return A2(
-		_VirtualDom_attribute,
-		'tabIndex',
-		$elm$core$String$fromInt(n));
-};
+var $author$project$Dropdown$viewOption = F3(
+	function (model, index, option) {
+		return option.is_button ? A2(
+			$elm$html$Html$form,
+			_List_fromArray(
+				[
+					$elm$html$Html$Attributes$method('POST'),
+					$elm$html$Html$Attributes$action('#'),
+					$fapian$elm_html_aria$Html$Attributes$Aria$role('none')
+				]),
+			_List_fromArray(
+				[
+					A2(
+					$elm$html$Html$button,
+					_List_fromArray(
+						[
+							$elm$html$Html$Attributes$type_('submit'),
+							$elm$html$Html$Attributes$class('text-gray-700 block w-full text-left px-4 py-2 text-sm'),
+							$elm$html$Html$Attributes$class('menu-item'),
+							$elm$html$Html$Attributes$classList(
+							_List_fromArray(
+								[
+									_Utils_Tuple2(
+									'text-gray-900',
+									_Utils_eq(
+										model.hoveredItem,
+										'menu-item-' + $elm$core$String$fromInt(index))),
+									_Utils_Tuple2(
+									'bg-gray-100',
+									_Utils_eq(
+										model.hoveredItem,
+										'menu-item-' + $elm$core$String$fromInt(index)))
+								])),
+							$fapian$elm_html_aria$Html$Attributes$Aria$role('menuitem'),
+							$elm$html$Html$Attributes$tabindex(-1),
+							$elm$html$Html$Attributes$id(
+							'menu-item-' + $elm$core$String$fromInt(index)),
+							$elm$html$Html$Events$onMouseEnter(
+							$author$project$Dropdown$ItemHovered(
+								'menu-item-' + $elm$core$String$fromInt(index)))
+						]),
+					_List_fromArray(
+						[
+							$elm$html$Html$text(option.text)
+						]))
+				])) : A2(
+			$elm$html$Html$a,
+			_List_fromArray(
+				[
+					$elm$html$Html$Attributes$href('#'),
+					$elm$html$Html$Attributes$class('text-gray-700 block px-4 py-2 text-sm'),
+					$elm$html$Html$Attributes$class('menu-item'),
+					$elm$html$Html$Attributes$classList(
+					_List_fromArray(
+						[
+							_Utils_Tuple2(
+							'text-gray-900',
+							_Utils_eq(
+								model.hoveredItem,
+								'menu-item-' + $elm$core$String$fromInt(index))),
+							_Utils_Tuple2(
+							'bg-gray-100',
+							_Utils_eq(
+								model.hoveredItem,
+								'menu-item-' + $elm$core$String$fromInt(index)))
+						])),
+					$fapian$elm_html_aria$Html$Attributes$Aria$role('menuitem'),
+					$elm$html$Html$Attributes$tabindex(-1),
+					$elm$html$Html$Attributes$id(
+					'menu-item-' + $elm$core$String$fromInt(index)),
+					$elm$html$Html$Events$onMouseEnter(
+					$author$project$Dropdown$ItemHovered(
+						'menu-item-' + $elm$core$String$fromInt(index)))
+				]),
+			_List_fromArray(
+				[
+					$elm$html$Html$text(option.text)
+				]));
+	});
 var $author$project$Dropdown$viewDropDownMenu = function (model) {
 	return _Utils_eq(model.dropdownStatus, $author$project$Dropdown$Open) ? A2(
 		$elm$html$Html$div,
@@ -5374,112 +5489,10 @@ var $author$project$Dropdown$viewDropDownMenu = function (model) {
 						$elm$html$Html$Attributes$class('py-1'),
 						$fapian$elm_html_aria$Html$Attributes$Aria$role('none')
 					]),
-				_List_fromArray(
-					[
-						A2(
-						$elm$html$Html$a,
-						_List_fromArray(
-							[
-								$elm$html$Html$Attributes$href('#'),
-								$elm$html$Html$Attributes$class('text-gray-700 block px-4 py-2 text-sm'),
-								$elm$html$Html$Attributes$class('menu-item'),
-								$elm$html$Html$Attributes$classList(
-								_List_fromArray(
-									[
-										_Utils_Tuple2('text-gray-900', model.hoveredItem === 'menu-item-0'),
-										_Utils_Tuple2('bg-gray-100', model.hoveredItem === 'menu-item-0')
-									])),
-								$fapian$elm_html_aria$Html$Attributes$Aria$role('menuitem'),
-								$elm$html$Html$Attributes$tabindex(-1),
-								$elm$html$Html$Attributes$id('menu-item-0'),
-								$elm$html$Html$Events$onMouseEnter(
-								$author$project$Dropdown$ItemHovered('menu-item-0'))
-							]),
-						_List_fromArray(
-							[
-								$elm$html$Html$text('Account Settings')
-							])),
-						A2(
-						$elm$html$Html$a,
-						_List_fromArray(
-							[
-								$elm$html$Html$Attributes$href('#'),
-								$elm$html$Html$Attributes$class('text-gray-700 block px-4 py-2 text-sm'),
-								$elm$html$Html$Attributes$class('menu-item'),
-								$elm$html$Html$Attributes$classList(
-								_List_fromArray(
-									[
-										_Utils_Tuple2('text-gray-900', model.hoveredItem === 'menu-item-1'),
-										_Utils_Tuple2('bg-gray-100', model.hoveredItem === 'menu-item-1')
-									])),
-								$fapian$elm_html_aria$Html$Attributes$Aria$role('menuitem'),
-								$elm$html$Html$Attributes$tabindex(-1),
-								$elm$html$Html$Attributes$id('menu-item-1'),
-								$elm$html$Html$Events$onMouseEnter(
-								$author$project$Dropdown$ItemHovered('menu-item-1'))
-							]),
-						_List_fromArray(
-							[
-								$elm$html$Html$text('Support')
-							])),
-						A2(
-						$elm$html$Html$a,
-						_List_fromArray(
-							[
-								$elm$html$Html$Attributes$href('#'),
-								$elm$html$Html$Attributes$class('text-gray-700 block px-4 py-2 text-sm'),
-								$elm$html$Html$Attributes$class('menu-item'),
-								$elm$html$Html$Attributes$classList(
-								_List_fromArray(
-									[
-										_Utils_Tuple2('text-gray-900', model.hoveredItem === 'menu-item-2'),
-										_Utils_Tuple2('bg-gray-100', model.hoveredItem === 'menu-item-2')
-									])),
-								$fapian$elm_html_aria$Html$Attributes$Aria$role('menuitem'),
-								$elm$html$Html$Attributes$tabindex(-1),
-								$elm$html$Html$Attributes$id('menu-item-2'),
-								$elm$html$Html$Events$onMouseEnter(
-								$author$project$Dropdown$ItemHovered('menu-item-2'))
-							]),
-						_List_fromArray(
-							[
-								$elm$html$Html$text('License')
-							])),
-						A2(
-						$elm$html$Html$form,
-						_List_fromArray(
-							[
-								$elm$html$Html$Attributes$method('POST'),
-								$elm$html$Html$Attributes$action('#'),
-								$fapian$elm_html_aria$Html$Attributes$Aria$role('none')
-							]),
-						_List_fromArray(
-							[
-								A2(
-								$elm$html$Html$button,
-								_List_fromArray(
-									[
-										$elm$html$Html$Attributes$type_('submit'),
-										$elm$html$Html$Attributes$class('text-gray-700 block w-full text-left px-4 py-2 text-sm'),
-										$elm$html$Html$Attributes$class('menu-item'),
-										$elm$html$Html$Attributes$classList(
-										_List_fromArray(
-											[
-												_Utils_Tuple2('text-gray-900', model.hoveredItem === 'menu-item-3'),
-												_Utils_Tuple2('bg-gray-100', model.hoveredItem === 'menu-item-3')
-											])),
-										$fapian$elm_html_aria$Html$Attributes$Aria$role('menuitem'),
-										$elm$html$Html$Attributes$tabindex(-1),
-										$elm$html$Html$Attributes$id('menu-item-3'),
-										$elm$html$Html$Events$onMouseEnter(
-										$author$project$Dropdown$ItemHovered('menu-item-3'))
-									]),
-								_List_fromArray(
-									[
-										$elm$html$Html$text('Sign out')
-									]))
-							]))
-					]))
+				A2(
+					$elm$core$List$indexedMap,
+					$author$project$Dropdown$viewOption(model),
+					model.input.options))
 			])) : A2(
 		$elm$html$Html$div,
 		_List_fromArray(
